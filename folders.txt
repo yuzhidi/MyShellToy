@@ -1,0 +1,4 @@
+aaafolder  /tmp/
+logs    /logsdir/
+working /user/workingdir/
+ckt	/home/ckt/
