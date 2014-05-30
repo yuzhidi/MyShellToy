@@ -6,11 +6,20 @@
 #
 ############################################################
 
+YYMMDDMMSS=
+
+function funPirnt() {
+	echo 'test func'
+}
+
 GITCB="git rev-parse --abbrev-ref HEAD"
-CameraWorkingBranch="m4_ss4020"
+CameraRemoteBranch="m4_ss4020"
 CameraPath="$HOME/work/HiCamera3.0"
 ProjectPath="/mnt/sdc1/sz_SS4020"
 ProjectBranch=
+
+ERROR_STRING_0="the branch is not right!! exit!"
+
 echo -e "\033[33m###########################################################
  check HiCamera3.0 branch
 ###########################################################"
@@ -26,8 +35,15 @@ $CMD
 HiCameraBranch=`$GITCB`
 echo $HiCameraBranch
 
+if [[ $CameraRemoteBranch != $HiCameraBranch ]]
+	then
+		echo -e "\033[31m$ERROR_STRING_0\033[0m"
+		exit 1
+fi
+
+
 echo -e "\033[33m###########################################################
- inter project
+ Enter project
 ###########################################################"
 echo -ne "\033[0m";
 
@@ -36,3 +52,7 @@ PWD=`pwd`
 echo $PWD
 ProjectPath=`$GITCB`
 echo $ProjectPath
+
+
+
+funPirnt
