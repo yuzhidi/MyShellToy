@@ -8,15 +8,31 @@
 
 YYMMDDMMSS=
 
-function funPirnt() {
-	echo 'test func'
+function funGetTime() {
+	yy=`date +%Y`
+	mm=`date +%m`
+	dd=`date +%d`
+	FF=`date +%F`
+	HH=`date +%H`
+	MM=`date +%M`
+	SS=`date +%S`
+	YYMMDDMMSS=$FF-$HH$MM$SS
 }
 
+# cmd shorten
 GITCB="git rev-parse --abbrev-ref HEAD"
+
+tmpBranch=
+
+# camera branch
 CameraRemoteBranch="m4_ss4020"
+CameraCarloIconCommit="60dc6be"
 CameraPath="$HOME/work/HiCamera3.0"
+
+# project branch
 ProjectPath="/mnt/sdc1/sz_SS4020"
-ProjectBranch=
+ProjectRemoteBranch="CD_QSLFW01_S10A_SOURCE"
+ProjectCarloIconCommit="14622f5"
 
 ERROR_STRING_0="the branch is not right!! exit!"
 
@@ -32,15 +48,25 @@ CMD="cd $CameraPath"
 echo $CMD
 $CMD
 
-HiCameraBranch=`$GITCB`
-echo $HiCameraBranch
+curBranch=`$GITCB`
+echo $curBranch
 
-if [[ $CameraRemoteBranch != $HiCameraBranch ]]
+# If NOT need check branch, commt out
+# TODO: add paramters to open/close branch check
+if [[ $CameraRemoteBranch != $curBranch ]]
 	then
 		echo -e "\033[31m$ERROR_STRING_0\033[0m"
+		git checkout $CameraRemoteBranch
 		exit 1
 fi
 
+#get latest code
+git pull
+
+funGetTime
+tmpBranch=$curBranch-$YYMMDDMMSS
+echo "create temp branch:$tmpBranch"
+git checkout -b $tmpBranch
 
 echo -e "\033[33m###########################################################
  Enter project
@@ -50,9 +76,29 @@ echo -ne "\033[0m";
 cd $ProjectPath
 PWD=`pwd`
 echo $PWD
-ProjectPath=`$GITCB`
-echo $ProjectPath
 
+curBranch=`$GITCB`
+echo $curBranch
+# If NOT need check branch, commt out
+# TODO: add paramters to open/close branch check
+if [[ $ProjectRemoteBranch != $curBranch ]]
+	then
+		echo -e "\033[31m$ERROR_STRING_0\033[0m"
+		git checkout $ProjectRemoteBranch
+		exit 1
+fi
 
+# git pull by needed
+# git pull
 
-funPirnt
+tmpBranch=$curBranch-$YYMMDDMMSS
+echo "create temp branch:$tmpBranch"
+git checkout -b $tmpBranch
+
+echo -e "\033[33m###########################################################
+build project
+###########################################################"
+echo -ne "\033[0m";
+
+sh  touchHiCameraGallery2.sh
+
