@@ -100,5 +100,38 @@ build project
 ###########################################################"
 echo -ne "\033[0m";
 
+#update files
 sh  touchHiCameraGallery2.sh
 
+#build
+
+#rename apk ?? for push ?? or push after echo build?
+
+echo -e "\033[33m###########################################################
+build carlo
+###########################################################"
+echo -ne "\033[0m";
+
+cd $CameraPath
+git revert $CameraCarloIconCommit -n
+
+#commit if need
+git commit -m "revert $CameraCarloIconCommit for $CameraRemoteBranch build carlo"
+
+cd $ProjectPath
+git revert $ProjectCarloIconCommit -n
+
+git commit -m "git revert $ProjectCarloIconCommit for $ProjectRemoteBranch build carlo"
+
+#build
+
+
+echo -e "\033[33m###########################################################
+push apks
+###########################################################"
+echo -ne "\033[0m";
+
+
+#cp 10a apk
+
+#cp 11a apk
