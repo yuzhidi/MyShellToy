@@ -71,6 +71,7 @@ CameraCarloIconCommit="ff99e2d"
 ProjectPath="/mnt/sdc1/sz_ss4040/"
 ProjectRemoteBranch="cd_slfqplus_s10a_source"
 ProjectCarloIconCommit="70738df"
+ProjectCarloIconCommit1="f03a4d9"
 
 ERROR_STRING_0="the branch is not right!! exit!"
 
@@ -163,6 +164,9 @@ git revert $ProjectCarloIconCommit -n
 
 git commit -m "git revert $ProjectCarloIconCommit for $ProjectRemoteBranch build carlo"
 
+git revert $ProjectCarloIconCommit1
+
+git commit -m "git revert $ProjectCarloIconCommit1 for $ProjectRemoteBranch build carlo"
 
 #build
 funcBuildCarlo
