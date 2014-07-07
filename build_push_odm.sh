@@ -71,7 +71,9 @@ CameraCarloIconCommit="ff99e2d"
 ProjectPath="/mnt/sdc1/sz_ss4040/"
 ProjectRemoteBranch="cd_slfqplus_s10a_source"
 ProjectCarloIconCommit="70738df"
-ProjectTelcelCommit1="f03a4d9"
+
+ProjectTelcelCommit1="a6846cb"  # [Fix Bug][SS4040 Telcel (slfqplus_s10a)][SmartPause_B03][The Smart pause is active by default but this not works the first time
+ProjectTelcelCommit2="f03a4d9"  #[Description]解决墨西哥反馈的问题2: Take a photo and in dowloads pictures > options > details > Please change the format date > For the format dd month year.
 
 ERROR_STRING_0="the branch is not right!! exit!"
 
@@ -168,6 +170,9 @@ git revert $ProjectTelcelCommit1 -n
 
 git commit -m "git revert $ProjectTelcelCommit1 for $ProjectRemoteBranch build carlo"
 
+git revert $ProjectTelcelCommit2 -n
+
+git commit -m "git revert $ProjectTelcelCommit2 for $ProjectRemoteBranch build carlo"
 #build
 funcBuildCarlo
 
